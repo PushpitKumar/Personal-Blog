@@ -1,0 +1,39 @@
+<%- include("partials/header.ejs") %>
+<section id="search" class="search-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center flex-column align-items-center">
+                <h3 class="heading">Search Results for "<%= query %>"</h3>
+                <% if (posts.length > 0) {
+                    posts.forEach(post => { %>
+                        <div class="col-lg-6 col-md-8 mb-4 d-flex justify-content-center">
+                            <div class="card flex-fill">
+                                <% if (post.imagePath) { %>
+                                    <img src="<%= post.imagePath %>" class="card-img-top" alt="Blog Cover Image"> 
+                                <% } else { %>
+                                    <img src="images/default-img.jpg" class="card-img-top" alt="Default Blog Cover Image">
+                                <% } %>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title"><%= post.title %></h5>
+                                    <div class="card-text"><%- post.truncatedContent %></div>
+                                    <div class="mt-auto card-bottom d-flex justify-content-between w-100">
+                                        <small><%= post.date %></small>
+                                        <a href="/readPost/<%= post.id %>" class="read-post-btn">Read more...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% });
+                } else { %>
+                    <p>No results found for "<%= query %>".</p>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            document.querySelector('footer').classList.add('no-result');
+                        });
+                    </script>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include("partials/footer.ejs") %>

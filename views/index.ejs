@@ -1,0 +1,77 @@
+<%- include("partials/header.ejs") %>
+<section id="home" class="home-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 welcome-banner">
+                <h2 class="welcome-title">Welcome to PK Reflections</h2>
+                <p class="welcome-msg">This is my personal blog where I dive into a world of thought-provoking articles covering a wide array of topics, from IT technologies to insightlful social reflections and my interests. Happy Reading!</p>
+            </div>
+        </div>
+        <div class="row">
+            <% if (locals.posts && posts.length > 0) { %>
+                <%//locals is not necessary here since this is form data. Direct access will work%>
+                <h3 class="featured-articles">Featured Articles</h3>
+                <% posts.forEach(post => { %>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-12 mb-4 d-flex">
+                        <div class="d-flex justify-content-center">
+                            <div class="card flex-fill">
+                                <% if (post.imagePath) { %>
+                                    <img src="<%= post.imagePath %>" class="card-img-top" alt="Blog Cover Image">
+                                <% } else { %>
+                                    <img src="images/default-img.jpg" class="card-img-top" alt="Default Blog Cover Image">
+                                <% } %>
+                                <div class="card-body d-flex flex-column">
+                                    <h5 class="card-title"><%= post.title %></h5>
+                                    <div class="card-text"><%- post.truncatedContent %></div>
+                                    <div class="mt-auto card-bottom d-flex justify-content-between w-100">
+                                        <small><%= post.date %></small>
+                                        <a href="/readPost/<%= post.id %>" class="read-post-btn">Read more...</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% });
+            } %>
+        </div>
+    </div>
+</section>
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="contact-header">
+                    <h2 class="contact-heading text-center">Get In Touch</h2>
+                    <p class="contact-msg text-center">Leave a message below and I'll be happy to oblige!</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 justify-content-center">
+                <div class="contact-form-container">
+                    <form id="contact-form">
+                        <div class="mb-3 mt-3">
+                            <label for="senderName" class="form-label">Name</label>
+                            <input type="text" id="senderName" name="senderName" class="form-control input-styling" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email ID</label>
+                            <input required type="email" id="email" name="email" class="form-control input-styling" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input required type="text" id="subject" name="subject" class="form-control input-styling" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="msg" class="form-label">Message</label>
+                            <textarea required id="msg" name="msg" class="form-control input-styling" rows="8"></textarea>
+                        </div>
+                        <button type="submit" class="btn-send-msg">Send Message</button>
+                    </form>
+                    <div id="success-msg" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include("partials/footer.ejs") %>

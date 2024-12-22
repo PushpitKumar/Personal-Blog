@@ -1,0 +1,35 @@
+<%- include("partials/header.ejs") %>
+<section id="new-post" class="new-post-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="heading">Publish a new Blog Post</h1>
+                <div class="new-post-container">
+                    <form id="blog-form" action="/posts" method="POST" enctype="multipart/form-data">
+                        <div class="mb-3 mt-3">
+                            <label for="title" class="form-label visually-hidden">Title</label> <!--visually-hidden class hides the label but is important for accessibility-->
+                            <input type="text" id="title" class="form-control input-styling" name="title" placeholder="Title" required maxlength="100" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="image" class="form-label visually-hidden">Upload Cover Image (Optional)</label>
+                            <div id="image-container" class="image-container">
+                                <div class="file-input-override d-flex flex-column align-items-center">
+                                    <i class="fa-solid fa-file-import mt-3 img-input-icon" aria-hidden="true"></i>
+                                    <h5 class="img-input-text">Upload Cover Image (Optional)</h5>
+                                    <p class="file-name text-center">No File chosen</p>
+                                </div>
+                                <input type="file" id="image" class="image-file-input" name="image" accept="image/png, image/jpeg, image/jpg"/>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label visually-hidden">Content</label>
+                            <textarea class="form-control input-styling" id="content" name="content" placeholder="Tell your story..." rows="10" minlength="100"></textarea>
+                        </div>
+                        <button type="submit" id="publish-btn">Publish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include("partials/footer.ejs") %>

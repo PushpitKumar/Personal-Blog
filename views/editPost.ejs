@@ -1,0 +1,44 @@
+<%- include("partials/header.ejs") %>
+<section id="edit-post" class="edit-post-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="heading">Edit Blog Post</h1>
+                <div class="edit-post-container">
+                    <form id="edit-form" action="/editPost/<%= post.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PUT">
+                        <div class="mb-3 mt-3">
+                            <label for="title" class="form-label visually-hidden">Blog Title</label> <!--visually-hidden class hides the label but is important for accessibility-->
+                            <input type="text" id="title" class="form-control input-styling" name="title" value="<%= post.title %>" readonly />
+                        </div> 
+                        <div class="mb-3">
+                            <label for="current-image" class="form-label visually-hidden">Uploaded Image</label>
+                            <% if (post.imagePath) { %>
+                                <img src="/<%= post.imagePath %>" class="post-image img-fluid rounded" alt="Blog Image" />
+                            <% } else { %>
+                                <p>No Image Uploaded</p>
+                            <% } %>
+                        </div>
+                        <div class="mb-3">
+                            <label for="new-image" class="form-label visually-hidden">Update Cover Image (Optional)</label>
+                            <div id="image-container-2" class="image-container">
+                                <div class="file-input-override d-flex flex-column align-items-center">
+                                    <i class="fa-solid fa-file-import mt-3 img-input-icon" aria-hidden="true"></i>
+                                    <h5 class="img-input-text">Update Cover Image (Optional)</h5>
+                                    <p class="file-name text-center">No File chosen</p>
+                                </div>
+                                <input type="file" id="new-image" name="new-image" class="image-file-input" accept="image/png, image/jpeg, image/jpg" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="content" class="form-label visually-hidden">Content</label>
+                            <textarea class="form-cont input-styling" id="content" name="content" rows="10" cols="137" minlength="100"><%- post.content %></textarea>
+                        </div>
+                        <button type="submit" id="publish-btn">Update</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<%- include("partials/footer.ejs") %>

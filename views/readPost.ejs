@@ -1,0 +1,37 @@
+<%- include("partials/header.ejs") %>
+<section id="read-post" class="read-post-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 d-flex flex-column justify-content-between">
+                <div class="d-flex justify-content-between flex-column flex-md-row align-items-md-center">
+                    <h1 class="post-title mb-0"><%= post.title %></h1>
+                    <div class="mt-2 pt-1 d-md-flex justify-content-md-end buttons">
+                        <a href="/editPost/<%= post.id %>" class="edit-btn me-1">Edit</a>
+                        <form id="delete-form" style="display: inline;" action="/deletePost/<%= post.id %>?_method=DELETE" method="post" onsubmit="return false;">
+                            <button type="submit" class="delete-btn" onclick="showDeletePopup()">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <small class="post-date"><%= post.date %></small>
+                <% if (post.imagePath) { %>
+                    <img src="/<%= post.imagePath %>" class="post-image img-fluid rounded" alt="Blog Image" />
+                <% } else { %>
+                    <img src="/images/default-img.jpg" class="post-image img-fluid rounded" alt="Default Blog Image" />
+                <% } %>
+                <div class="post-content"><%- post.content.replace(/src="\/?(uploads\/[^"]+)"/g, 'src="/$1"') %></div> <!--Replacing \ with / is crucial for loading images-->
+            </div>
+        </div>
+    </div>
+</section>
+<!--Screen overlay-->
+<div id="screen-overlay" class="screen-overlay"></div>
+<!--Delete Post Popup-->
+<div id="delete-popup" class="popup-overlay">
+    <div class="popup-content">
+        <h5 class="popup-title">Delete Post</h5>
+        <p>Are you sure you want to delete this Post?</p>
+        <button type="button" class="btn-cancel" onclick="hideDeletePopup()">Cancel</button>
+        <button type="button" class="btn-confirm" onclick="confirmDeletion()">Confirm</button>
+    </div>
+</div>
+<%- include("partials/footer.ejs") %>
