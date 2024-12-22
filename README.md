@@ -1,6 +1,6 @@
 # Personal-Blog
 
-## Table of Coontents
+## Table of Contents
 <ol>
 <li>Project Overview</li>
 <br/>
